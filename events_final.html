@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - Events</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        .filter-container { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        .filter-container input[type="text"] { padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 8px; transition: border-color 0.3s; max-width: 300px; flex: 1; }
+        .filter-container input[type="date"] { padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 8px; transition: border-color 0.3s; }
+        .filter-container input:focus { border-color: #3b82f6; outline: none; }
+        .filter-container label { display: inline; margin: 0; font-weight: 600; font-size: 0.9rem; color: #475569; }
+
+        .events-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .event-card { background-color: #f8fafc; padding: 22px; border-radius: 14px; border: 1.5px solid #f1f5f9; box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; text-align: left; }
+        .event-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .event-card h3 { color: #1e293b; margin-bottom: 8px; }
+        .event-card .date { color: #1a56db; font-weight: 600; margin-bottom: 8px; }
+        .event-card p { color: #64748b; font-size: 0.95rem; }
+
+        .event-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin-bottom: 10px; }
+        .badge-tech { background: #eff6ff; color: #1a56db; }
+        .badge-cultural { background: #fefce8; color: #a16207; }
+        .badge-sports { background: #dcfce7; color: #16a34a; }
+        .badge-career { background: #f3e8ff; color: #7c3aed; }
+
+        .event-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .evt-btn { padding: 8px 20px; border: 1.5px solid #e2e8f0; background: white; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #475569; transition: all 0.25s; }
+        .evt-btn:hover { border-color: #3b82f6; color: #1a56db; }
+        .evt-btn.active { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white; border-color: transparent; }
+
+        .register-btn { display: inline-block; margin-top: 12px; padding: 8px 18px; background: linear-gradient(135deg, #1a56db, #3b82f6); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; font-family: 'Inter', sans-serif; transition: transform 0.2s, box-shadow 0.2s; }
+        .register-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,86,219,0.3); }
+
+        .countdown-card { background: linear-gradient(135deg, #eff6ff, #f0f7ff); border: 1.5px solid #bfdbfe; border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 25px; }
+        .countdown-card h3 { color: #1a56db; margin-bottom: 8px; font-size: 1.1rem; }
+        .countdown-timer { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
+        .countdown-unit { text-align: center; }
+        .countdown-unit .number { font-size: 1.8rem; font-weight: 800; color: #1a56db; }
+        .countdown-unit .label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html">Mess</a>
+            <a href="clubs.html">Clubs</a>
+            <a href="events_final.html" class="active">Events</a>
+            <a href="maps_final.html">Directions</a>
+            <a href="faq_final.html">FAQ</a>
+            <a href="shops.html">Shops</a>
+            <a href="medical_store.html">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header>
+                <h1>Upcoming Events</h1>
+                <p class="intro">Stay updated on upcoming events and activities happening on campus. Join us and participate!</p>
+            </header>
+
+            <div class="countdown-card" id="countdownCard">
+                <h3>⏰ Next Event Countdown</h3>
+                <p id="nextEventName" style="color:#475569; margin-bottom:8px;"></p>
+                <div class="countdown-timer" id="countdownTimer"></div>
+            </div>
+
+            <section class="event-filters" id="eventFilters">
+                <button class="evt-btn active" onclick="filterEventCategory('all')">All</button>
+                <button class="evt-btn" onclick="filterEventCategory('tech')">💻 Tech</button>
+                <button class="evt-btn" onclick="filterEventCategory('cultural')">🎭 Cultural</button>
+                <button class="evt-btn" onclick="filterEventCategory('sports')">⚽ Sports</button>
+                <button class="evt-btn" onclick="filterEventCategory('career')">💼 Career</button>
+            </section>
+
+            <section class="filter-container">
+
+                <input type="text" id="searchBox" placeholder="Search for events..." onkeyup="filterEvents()">
+                <label for="fromDate">From:</label>
+                <input type="date" id="fromDate" onchange="filterEvents()">
+                <label for="toDate">To:</label>
+                <input type="date" id="toDate" onchange="filterEvents()">
+            </section>
+
+            <section class="events-container" id="eventsContainer">
+
+                <article class="event-card" data-date="2025-03-15" data-category="tech">
+                    <span class="event-badge badge-tech">💻 Tech</span>
+                    <h3>Tech Symposium 2025</h3>
+                    <p class="date">Date: March 15, 2025</p>
+                    <p>Join industry experts as they discuss the latest trends in technology.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Tech Symposium 2025!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-04-20" data-category="cultural">
+                    <span class="event-badge badge-cultural">🎭 Cultural</span>
+                    <h3>Cultural Fest</h3>
+                    <p class="date">Date: April 20, 2025</p>
+                    <p>Celebrate diversity with performances, food, and art from various cultures.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Cultural Fest!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-05-10" data-category="sports">
+                    <span class="event-badge badge-sports">⚽ Sports</span>
+                    <h3>Sports Day</h3>
+                    <p class="date">Date: May 10, 2025</p>
+                    <p>Participate in various sports competitions and show your skills!</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Sports Day!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-06-05" data-category="tech">
+                    <span class="event-badge badge-tech">💻 Tech</span>
+                    <h3>Hackathon 2025</h3>
+                    <p class="date">Date: June 5-6, 2025</p>
+                    <p>Join us for a 24-hour hackathon with prizes and networking opportunities.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Hackathon 2025!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-07-15" data-category="cultural">
+                    <span class="event-badge badge-cultural">🎭 Cultural</span>
+                    <h3>Art Exhibition</h3>
+                    <p class="date">Date: July 15-20, 2025</p>
+                    <p>Experience creativity through the works of talented student artists.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Art Exhibition!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-08-25" data-category="career">
+                    <span class="event-badge badge-career">💼 Career</span>
+                    <h3>Job Fair</h3>
+                    <p class="date">Date: August 25, 2025</p>
+                    <p>Meet potential employers and explore career opportunities.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Job Fair!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-04-05" data-category="tech">
+                    <span class="event-badge badge-tech">💻 Tech</span>
+                    <h3>Web Dev Workshop</h3>
+                    <p class="date">Date: April 5, 2025</p>
+                    <p>Hands-on workshop on HTML, CSS, JavaScript, and React — build a project from scratch!</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Web Dev Workshop!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-05-20" data-category="cultural">
+                    <span class="event-badge badge-cultural">🎭 Cultural</span>
+                    <h3>Campus Music Night</h3>
+                    <p class="date">Date: May 20, 2025</p>
+                    <p>Live performances by student bands and DJs. Open mic slots available!</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Music Night!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-06-18" data-category="career">
+                    <span class="event-badge badge-career">💼 Career</span>
+                    <h3>Inter-College Debate</h3>
+                    <p class="date">Date: June 18, 2025</p>
+                    <p>Sharpen your public speaking skills in this prestigious debate competition.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Debate!')">Register</button>
+                </article>
+
+                <article class="event-card" data-date="2025-09-10" data-category="tech">
+                    <span class="event-badge badge-tech">💻 Tech</span>
+                    <h3>AI & ML Guest Lecture</h3>
+                    <p class="date">Date: September 10, 2025</p>
+                    <p>Special lecture by a Google engineer on real-world AI/ML applications.</p>
+                    <button class="register-btn" onclick="alert('🎉 Registered for Guest Lecture!')">Register</button>
+                </article>
+            </section>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <script src="events.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - Campus Directions</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
+    <style>
+
+        .ui-card { background-color: #ffffff; padding: 25px; border-radius: 16px; border: 1.5px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); margin-bottom: 25px; }
+
+        #map { height: 500px; width: 100%; border-radius: 12px; margin: 0; border: 1px solid #e2e8f0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.05)); z-index: 1; }
+        .direction-form { text-align: left; max-width: 500px; margin: 0 auto 20px; }
+
+        .map-controls-wrapper { display: flex; flex-direction: column; gap: 15px; }
+        .map-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: flex-end; }
+        .map-controls .form-row { margin-bottom: 0; }
+        .map-controls label { font-weight: 600; color: #334155; margin-bottom: 6px; display: block; font-size: 0.95rem; }
+        .map-controls select { width: 100%; padding: 12px; border-radius: 10px; border: 1.5px solid #e2e8f0; background: white; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #1e293b; outline: none; transition: border-color 0.2s; }
+        .map-controls select:focus { border-color: #3b82f6; }
+
+        .map-btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; padding-top: 15px; border-top: 1px solid #f1f5f9; justify-content: center; }
+        .map-btn-group button { padding: 12px 24px; font-size: 0.95rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+        .map-btn-group button:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.1); }
+
+        .btn-secondary { background: #f8fafc; color: #475569; border: 1.5px solid #e2e8f0; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; }
+        .btn-secondary:hover { background: #f1f5f9; border-color: #cbd5e1; }
+
+        .map-layout { display: flex; gap: 25px; flex-direction: column; }
+        @media (min-width: 900px) {
+            .map-layout { flex-direction: row; }
+            .map-controls-panel { width: 350px; flex-shrink: 0; }
+            .map-display-panel { flex-grow: 1; min-width: 0; } 
+            .map-controls { grid-template-columns: 1fr; }
+            .map-btn-group { flex-direction: column; }
+            .map-btn-group button { width: 100%; }
+        }
+
+        .leaflet-routing-container { display: none !important; }
+    </style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html">Mess</a>
+            <a href="clubs.html">Clubs</a>
+            <a href="events_final.html">Events</a>
+            <a href="maps_final.html" class="active">Directions</a>
+            <a href="faq_final.html">FAQ</a>
+            <a href="shops.html">Shops</a>
+            <a href="medical_store.html">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header class="map-header">
+                <h1>Campus Directions</h1>
+                <p class="intro">Find your way around the campus with ease</p>
+            </header>
+
+            <div class="map-layout">
+                <div class="map-controls-panel">
+
+                    <section class="ui-card">
+                        <h3 style="margin-top:0; margin-bottom:15px; color:#0f172a; font-size:1.15rem; border-bottom:2px solid #f1f5f9; padding-bottom:10px;">Navigation Panel</h3>
+                        <div class="map-controls-wrapper">
+                            <div class="map-controls">
+                                <div class="form-row">
+                                    <label for="start">Start Location:</label>
+
+                                    <select id="start"></select>
+                                </div>
+                                <div class="form-row">
+                                    <label for="end">Destination:</label>
+                                    <select id="end"></select>
+                                </div>
+                            </div>
+
+                            <div class="map-btn-group">
+                                <button class="btn-primary" id="getDirections">📍 Get Directions</button>
+                                <button class="btn-secondary" id="locateMe">🧭 My Location</button>
+                                <button class="btn-secondary" id="resetMap">🔄 Reset Map</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="map-display-panel">
+
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+
+    <script src="maps.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - Club Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container { text-align: left; }
+        #clubDescription { display: none; background: #eff6ff; padding: 14px; border-radius: 10px; margin-top: 10px; color: #475569; font-size: 0.95rem; border-left: 4px solid #3b82f6; }
+        #btnTooltip { display: none; background: #1e293b; color: white; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; margin-top: 8px; text-align: center; }
+        .radio-group label, .checkbox-group label { display: inline; font-weight: normal; margin-right: 15px; cursor: pointer; }
+
+        .ui-card { background-color: #ffffff; padding: 25px; border-radius: 16px; border: 1.5px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); margin-bottom: 25px; }
+        .ui-card h3 { color: #0f172a; margin-top: 0; margin-bottom: 20px; font-size: 1.25rem; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
+        .ui-card label { font-weight: 600; color: #334155; margin-bottom: 6px; font-size: 0.95rem; }
+
+        .status-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 5px; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .status-table th { background: #f8fafc; color: #475569; padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 1px solid #e2e8f0; }
+        .status-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+        .status-table tr:last-child td { border-bottom: none; }
+        .status-table tr:hover { background: #f8fafc; }
+
+        .status-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; }
+        .status-open { background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+        .status-closed { background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+
+        .btn-wrapper { text-align: center; margin-top: 10px; }
+        #registerBtn { padding: 12px 30px; font-size: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(26, 86, 219, 0.2); transition: transform 0.2s, box-shadow 0.2s; }
+        #registerBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26, 86, 219, 0.3); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html">Mess</a>
+            <a href="clubs.html" class="active">Clubs</a>
+            <a href="events_final.html">Events</a>
+            <a href="maps_final.html">Directions</a>
+            <a href="faq_final.html">FAQ</a>
+            <a href="shops.html">Shops</a>
+            <a href="medical_store.html">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header>
+                <h1>Join a Club</h1>
+                <p class="intro">Fill out the form to register for your preferred club. Choose wisely!</p>
+            </header>
+
+            <section>
+
+                <form id="clubForm" method="POST"
+                    action="https://script.google.com/macros/s/AKfycbwhHBu4mUZ2EThe3aaWidE5dJQKrFZKlLV84Q5Emz97S0BOQUnp0ZsSFFu-4Syq0kfK/exec">
+
+                    <div class="ui-card">
+                        <h3>Personal Details</h3>
+
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        <div class="error-msg" id="nameError">Name should contain only letters and spaces (2-50 characters)</div>
+
+                        <label for="regno">Registration No:</label>
+                        <input type="text" id="regno" name="regno" placeholder="e.g. 24BCE0123" required>
+                        <div class="error-msg" id="regnoError">Format: 2 digits + 3 letters + 4 digits (e.g. 24BCE0123)</div>
+
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" placeholder="e.g. name@vitstudent.ac.in" required>
+                        <div class="error-msg" id="emailError">Please enter a valid email address</div>
+
+                        <label>Year of Study:</label>
+                        <div class="radio-group" style="margin-top: 8px;">
+                            <label><input type="radio" name="year" value="1st Year"> 1st Year</label>
+                            <label><input type="radio" name="year" value="2nd Year"> 2nd Year</label>
+                            <label><input type="radio" name="year" value="3rd Year"> 3rd Year</label>
+                            <label><input type="radio" name="year" value="4th Year"> 4th Year</label>
+                        </div>
+                        <div class="error-msg" id="yearError">Please select your year of study</div>
+                    </div>
+
+                    <div class="ui-card">
+                        <h3>Club Selection</h3>
+
+                        <label for="club">Select Your Club:</label>
+                        <select id="club" name="club" onchange="displayDescription()" required style="margin-top: 8px;">
+                            <option value="">-- Select a Club --</option>
+                            <option value="Tech Club">Tech Club</option>
+                            <option value="Cultural Society">Cultural Society</option>
+                            <option value="Developer's Guild">Developer's Guild</option>
+                            <option value="Art Club">Art Club</option>
+                            <option value="Music Society">Music Society</option>
+                            <option value="Robotics Club">Robotics Club</option>
+                            <option value="Photography Club">Photography Club</option>
+                            <option value="Entrepreneurship Cell">Entrepreneurship Cell</option>
+                            <option value="Debate Club">Debate Club</option>
+                            <option value="Literature Society">Literature Society</option>
+                        </select>
+                        <div class="error-msg" id="clubError">Please select a club</div>
+
+                        <div id="clubDescription" class="club-description"></div>
+
+                        <div class="checkbox-group" style="margin-top: 20px;">
+                            <label>
+                                <input type="checkbox" id="agreeRules" name="agreeRules">
+                                I agree to follow the club rules and guidelines
+                            </label>
+                        </div>
+                        <div class="error-msg" id="agreeError">You must agree to the club rules</div>
+                    </div>
+
+                    <div class="btn-wrapper">
+                        <button type="button" class="btn-primary" id="registerBtn"
+                                onclick="submitRegistration()"
+                                onmouseover="showTooltip()"
+                                onmouseout="hideTooltip()">
+                            Register Now
+                        </button>
+                        <div class="tooltip" id="btnTooltip">Click to submit your registration</div>
+                    </div>
+                </form>
+            </section>
+
+            <section class="ui-card" style="margin-top: 30px;">
+                <h3>Club Registration Status</h3>
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th>Club Name</th>
+                            <th>Registration Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clubStatusTable"></tbody>
+                </table>
+            </section>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <div class="popup" id="registrationPopup">
+        <div class="popup-content">
+            <h2>Registration Status</h2>
+            <p id="popupMessage"></p>
+
+            <button class="close-button" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script src="clubs.js"></script>
+
+</body>
+</html>

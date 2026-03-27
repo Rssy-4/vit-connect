@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - Campus Medical Store</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .container { max-width: 1100px; }
+
+        .section-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .ui-card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1.5px solid #f1f5f9;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .ui-card h2 {
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            background: #f8fafc;
+            border: 1.5px solid #f1f5f9;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .product-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .product-card .price {
+            color: #1a56db;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin: 8px 0;
+        }
+
+        .product-card .desc {
+            color: #64748b;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .add-btn {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #1a56db, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.88rem;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 86, 219, 0.3);
+        }
+
+        .add-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .cart-empty {
+            color: #94a3b8;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cart-item:last-child { border-bottom: none; }
+
+        .cart-item-info h4 {
+            font-size: 0.95rem;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .cart-item-info span {
+            color: #64748b;
+            font-size: 0.82rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            border-color: #3b82f6;
+            color: #1a56db;
+            background: #eff6ff;
+        }
+
+        .qty-display {
+            font-weight: 600;
+            font-size: 1rem;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #dc2626;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+
+        .remove-btn:hover { transform: scale(1.2); }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e2e8f0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .cart-total .amount {
+            color: #1a56db;
+            font-size: 1.3rem;
+        }
+
+        .delivery-form {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .delivery-form .form-row {
+            margin-bottom: 12px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            padding: 7px 18px;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #475569;
+            transition: all 0.25s;
+        }
+
+        .filter-btn:hover { border-color: #3b82f6; color: #1a56db; }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #1a56db, #3b82f6);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html">Mess</a>
+            <a href="clubs.html">Clubs</a>
+            <a href="events_final.html">Events</a>
+            <a href="maps_final.html">Directions</a>
+            <a href="faq_final.html">FAQ</a>
+            <a href="shops.html">Shops</a>
+            <a href="medical_store.html" class="active">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header>
+                <h1>🏥 Campus Medical Store</h1>
+                <p class="intro">Order medicines and health essentials. Delivered to your hostel room!</p>
+            </header>
+
+            <section>
+
+                <div class="category-filter" id="categoryFilter">
+                    <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+                    <button class="filter-btn" onclick="filterCategory('fever')">🤒 Fever & Pain</button>
+                    <button class="filter-btn" onclick="filterCategory('cold')">🤧 Cold & Cough</button>
+                    <button class="filter-btn" onclick="filterCategory('stomach')">🤢 Stomach</button>
+                    <button class="filter-btn" onclick="filterCategory('firstaid')">🩹 First Aid</button>
+                    <button class="filter-btn" onclick="filterCategory('wellness')">💊 Wellness</button>
+                </div>
+            </section>
+
+            <section style="margin-top: 30px;">
+                <h2 class="section-header">Available Products</h2>
+
+                <div class="products-grid" id="productsGrid">
+
+                </div>
+            </section>
+
+            <section class="ui-card" id="cartSection">
+                <h2>🛒 Your Cart</h2>
+                <div id="cartItems">
+
+                    <div class="cart-empty" style="padding: 40px 20px; background: #f8fafc; border-radius: 12px; border: 1.5px dashed #cbd5e1;">
+                        <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">🛍️</span>
+                        Your cart is empty. Add items from above!
+                    </div>
+                </div>
+                <div class="cart-total" id="cartTotal" style="display: none;">
+                    <span>Total:</span>
+                    <span class="amount" id="totalAmount">₹0</span>
+                </div>
+            </section>
+
+            <section class="ui-card" id="deliverySection" style="display: none;">
+                <h2>📦 Delivery Details</h2>
+                <form id="deliveryForm" class="delivery-form">
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label for="medName" style="font-weight:600; color:#334155; margin-bottom:5px; display:block;">Full Name:</label>
+                            <input type="text" id="medName" placeholder="Enter your name" required>
+                            <div class="error-msg" id="medNameError">Only letters and spaces (2-50 chars)</div>
+                        </div>
+                        <div class="form-row">
+                            <label for="medRegno" style="font-weight:600; color:#334155; margin-bottom:5px; display:block;">Registration No:</label>
+                            <input type="text" id="medRegno" placeholder="e.g. 24BCE0123" required>
+                            <div class="error-msg" id="medRegnoError">Format: 2 digits + 3 letters + 4 digits</div>
+                        </div>
+                    </div>
+                        <div class="form-grid">
+                            <div class="form-row">
+                                <label for="medHostel" style="font-weight:600; color:#334155; margin-bottom:5px; display:block;">Hostel Block:</label>
+
+                                <select id="medHostel" required>
+                                    <option value="">Select Block</option>
+                                    <option value="Men's Hostel A">Men's Hostel A</option>
+                                    <option value="Men's Hostel B">Men's Hostel B</option>
+                                    <option value="Men's Hostel C">Men's Hostel C</option>
+                                    <option value="Men's Hostel D">Men's Hostel D</option>
+                                    <option value="Men's Hostel E">Men's Hostel E</option>
+                                    <option value="Women's Hostel A">Women's Hostel A</option>
+                                    <option value="Women's Hostel B">Women's Hostel B</option>
+                                    <option value="Women's Hostel C">Women's Hostel C</option>
+                                </select>
+                                <div class="error-msg" id="medHostelError">Please select your hostel</div>
+                            </div>
+                            <div class="form-row">
+                                <label for="medRoom" style="font-weight:600; color:#334155; margin-bottom:5px; display:block;">Room Number:</label>
+                                <input type="text" id="medRoom" placeholder="e.g. 302" required>
+                                <div class="error-msg" id="medRoomError">Enter a valid room number</div>
+                            </div>
+                        </div>
+
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button type="button" class="btn-primary" onclick="placeOrder()" style="padding: 12px 30px; font-size: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(26, 86, 219, 0.2); transition: transform 0.2s, box-shadow 0.2s;">🚀 Place Order</button>
+                    </div>
+                </form>
+            </section>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <div class="popup" id="orderPopup">
+        <div class="popup-content">
+            <h2>Order Placed! ✅</h2>
+            <p id="orderMessage"></p>
+            <button class="close-button" onclick="closeOrderPopup()">Close</button>
+        </div>
+    </div>
+
+    <script src="medical_store.js"></script>
+
+</body>
+</html>

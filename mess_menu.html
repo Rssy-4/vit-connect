@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - Mess Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        .menu-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .menu-table th { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white; padding: 14px 16px; text-align: left; font-size: 0.95rem; }
+        .menu-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; color: #475569; font-size: 0.95rem; }
+        .menu-table tr:hover { background: #eff6ff; }
+
+        .menu-controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+
+        .todays-special { background: linear-gradient(135deg, #eff6ff, #f0f7ff); border: 1.5px solid #bfdbfe; border-radius: 14px; padding: 24px; margin-bottom: 30px; }
+        .todays-special h3 { color: #1a56db; font-size: 1.3rem; margin-bottom: 16px; }
+        .today-meals { display: flex; gap: 20px; flex-wrap: wrap; }
+        .today-type { flex: 1; min-width: 250px; background: white; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .type-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
+        .today-type p { margin: 6px 0; color: #475569; font-size: 0.93rem; }
+
+        .meal-label { font-weight: 600; color: #1e293b; white-space: nowrap; }
+        .meal-time { color: #3b82f6; font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html" class="active">Mess</a>
+            <a href="clubs.html">Clubs</a>
+            <a href="events_final.html">Events</a>
+            <a href="maps_final.html">Directions</a>
+            <a href="faq_final.html">FAQ</a>
+            <a href="shops.html">Shops</a>
+            <a href="medical_store.html">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header>
+                <h1>Mess Menu</h1>
+                <p class="intro">Check today's special or browse the full 7-day menu by selecting a day and mess type.</p>
+            </header>
+
+            <aside class="todays-special" id="todaysSpecial">
+
+            </aside>
+
+            <section class="menu-controls">
+
+                <select id="daySelect" title="Select day" onchange="showMenu()">
+                    <option value="">Select Day</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                </select>
+
+                <select id="messType" title="Select mess type" onchange="showMenu()">
+                    <option value="">Select Mess Type</option>
+                    <option value="veg">🟢 Vegetarian</option>
+                    <option value="nonVeg">🔴 Non-Vegetarian</option>
+                    <option value="special">⭐ Special</option>
+                </select>
+            </section>
+
+            <section>
+                <div id="menuDisplay" class="day-menu"></div>
+            </section>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <script src="mess.js"></script>
+
+</body>
+</html>

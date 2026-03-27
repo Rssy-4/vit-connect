@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - FAQ</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container { text-align: left; }
+        .faq-item { border: 1.5px solid #e2e8f0; border-radius: 10px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s; }
+        .faq-question { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1e293b; background: #f8fafc; transition: background 0.3s; }
+        .faq-question:hover { background: #eff6ff; }
+        .plus-icon { font-size: 1.4rem; color: #3b82f6; transition: transform 0.3s; }
+        .plus-icon.rotated { transform: rotate(45deg); }
+        .faq-answer { display: none; padding: 0 20px 16px; color: #64748b; line-height: 1.6; }
+        .faq-answer.show { display: block; }
+        .question-form { margin-top: 30px; text-align: left; }
+        #thankYouMessage { display: none; background: #dcfce7; color: #16a34a; padding: 12px; border-radius: 8px; margin-top: 15px; font-weight: 600; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html">Mess</a>
+            <a href="clubs.html">Clubs</a>
+            <a href="events_final.html">Events</a>
+            <a href="maps_final.html">Directions</a>
+            <a href="faq_final.html" class="active">FAQ</a>
+            <a href="shops.html">Shops</a>
+            <a href="medical_store.html">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header>
+                <h1>Frequently Asked Questions</h1>
+            </header>
+
+            <section>
+
+                <article class="faq-item">
+
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <span>What is VITConnect?</span>
+                        <span class="plus-icon">+</span>
+                    </div>
+                    <div class="faq-answer">VITConnect is a platform designed to help students manage their campus life at VIT. It provides access to mess menus, club registrations, events, campus maps, and more.</div>
+                </article>
+
+                <article class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <span>How can I register for clubs?</span>
+                        <span class="plus-icon">+</span>
+                    </div>
+                    <div class="faq-answer">You can register for clubs by navigating to the 'Club Registration' section. Fill out the form with your name, registration number, email, and select your preferred club.</div>
+                </article>
+
+                <article class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <span>How do I check the mess menu?</span>
+                        <span class="plus-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Visit the Mess Menu page, select the day and mess type (Veg, Non-Veg, or Special) from the dropdowns to view the complete menu for that day.</div>
+                </article>
+
+                <article class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <span>Can I navigate the campus using VITConnect?</span>
+                        <span class="plus-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Yes! Go to the Campus Directions page, select your start location and destination, and click 'Get Directions' to see the route on the map.</div>
+                </article>
+
+                <article class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <span>How can I give feedback?</span>
+                        <span class="plus-icon">+</span>
+                    </div>
+                    <div class="faq-answer">Visit our Feedback page built with React! You can rate different aspects of campus life and submit your comments.</div>
+                </article>
+            </section>
+
+            <section class="form-container">
+                <h3>Ask a Question</h3>
+
+                <form id="questionForm">
+
+                    <fieldset>
+                        <legend>Your Details</legend>
+
+                        <div class="form-group">
+                            <label for="faqName">Your Name:</label>
+                            <input type="text" id="faqName" name="Name" placeholder="Enter your name" required>
+                            <div class="error-msg" id="faqNameError">Name should contain only letters and spaces</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="faqRegno">Registration Number:</label>
+                            <input type="text" id="faqRegno" name="RegNo" placeholder="e.g. 24BCE0123" required>
+                            <div class="error-msg" id="faqRegnoError">Format: 2 digits + 3 letters + 4 digits (e.g. 24BCE0123)</div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Your Question</legend>
+
+                        <div class="form-group">
+                            <label for="faqQuestion">Describe Your Question:</label>
+
+                            <textarea id="faqQuestion" name="Question" placeholder="Type your question here..." required></textarea>
+                            <div class="error-msg" id="faqQuestionError">Please enter your question (at least 10 characters)</div>
+                        </div>
+                    </fieldset>
+
+                    <button type="button" class="btn-primary" onclick="submitQuestion()">Submit Question</button>
+                </form>
+
+                <div class="thank-you" id="thankYouMessage">
+                    ✅ Thank you for submitting your question! We will review it and update the FAQ page accordingly.
+                </div>
+            </section>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <script src="faq.js"></script>
+
+</body>
+</html>

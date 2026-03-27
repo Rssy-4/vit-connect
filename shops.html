@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITConnect - Campus Shops</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+
+        .shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .shop-card { background: #f8fafc; padding: 22px; border-radius: 14px; border: 1.5px solid #f1f5f9; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+        .shop-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .shop-card h3 { color: #1e293b; margin-bottom: 6px; }
+        .shop-card p { color: #64748b; font-size: 0.95rem; }
+
+        .shop-controls { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .shop-controls input, .shop-controls select { flex: 1; min-width: 200px; }
+
+        .fav-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; transition: transform 0.2s; }
+        .fav-btn:hover { transform: scale(1.2); }
+
+        .category-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .cat-btn { padding: 8px 20px; border: 1.5px solid #e2e8f0; background: white; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #475569; transition: all 0.25s; }
+        .cat-btn:hover { border-color: #3b82f6; color: #1a56db; }
+        .cat-btn.active { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white; border-color: transparent; }
+
+        .status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; margin-top: 8px; }
+        .status-open { background: #dcfce7; color: #16a34a; }
+        .status-closed { background: #fee2e2; color: #dc2626; }
+
+        .shop-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .shop-contact { font-size: 0.88rem; color: #3b82f6; font-weight: 500; }
+        .category-tag { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 0.78rem; font-weight: 600; background: #eff6ff; color: #1a56db; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">VIT<span>Connect</span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="mess_menu.html">Mess</a>
+            <a href="clubs.html">Clubs</a>
+            <a href="events_final.html">Events</a>
+            <a href="maps_final.html">Directions</a>
+            <a href="faq_final.html">FAQ</a>
+            <a href="shops.html" class="active">Shops</a>
+            <a href="medical_store.html">Medical</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header>
+                <h1>Campus Shops</h1>
+                <p class="intro">Explore campus shops, compare prices, and find what you need!</p>
+            </header>
+
+            <section class="category-filters" id="categoryFilters">
+
+                <button class="cat-btn active" onclick="filterCategory('all')">All</button>
+                <button class="cat-btn" onclick="filterCategory('food')">🍕 Food</button>
+                <button class="cat-btn" onclick="filterCategory('medical')">💊 Medical</button>
+                <button class="cat-btn" onclick="filterCategory('electronics')">📱 Electronics</button>
+                <button class="cat-btn" onclick="filterCategory('stationery')">📝 Stationery</button>
+                <button class="cat-btn" onclick="filterCategory('services')">✂️ Services</button>
+            </section>
+
+            <section>
+                <div class="shop-controls">
+
+                    <input type="text" id="search" placeholder="Search for shops...">
+
+                    <select id="sort" class="sort-select">
+                        <option value="default">Sort by</option>
+                        <option value="price-low-high">Price: Low to High</option>
+                        <option value="price-high-low">Price: High to Low</option>
+                        <option value="rating-high">Rating: Best First</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="shop-list">
+
+                <article class="shop-item" data-price="300" data-category="medical" data-rating="3.5" data-open="11" data-close="24">
+                    <i class="favorite far fa-heart"></i>
+                    <span class="category-tag">💊 Medical</span>
+                    <h2>Medical Store</h2>
+                    <p>Location: Near Women's Hostel</p>
+                    <p>Description: Medicines, first-aid kits, and health essentials</p>
+                    <p class="price">Avg. Price: ₹300</p>
+                    <div class="rating" data-stars="3.5">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="shop-meta">
+                        <span class="shop-contact">📞 98765-43210</span>
+                        <span class="status-badge" data-open="11" data-close="24">⏳</span>
+                    </div>
+                    <div class="details">Hours: 11:00 AM – 12:00 AM</div>
+                </article>
+
+                <article class="shop-item" data-price="5000" data-category="electronics" data-rating="3" data-open="12" data-close="20">
+                    <i class="favorite far fa-heart"></i>
+                    <span class="category-tag">📱 Electronics</span>
+                    <h2>Samsung Store</h2>
+                    <p>Location: Near Foodies</p>
+                    <p>Description: Phones, accessories, and repairs</p>
+                    <p class="price">Avg. Price: ₹5000</p>
+                    <div class="rating" data-stars="3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="shop-meta">
+                        <span class="shop-contact">📞 98765-11111</span>
+                        <span class="status-badge" data-open="12" data-close="20">⏳</span>
+                    </div>
+                    <div class="details">Hours: 12:00 PM – 8:00 PM</div>
+                </article>
+
+                <article class="shop-item" data-price="3000" data-category="services" data-rating="2.5" data-open="9" data-close="20">
+                    <i class="favorite far fa-heart"></i>
+                    <span class="category-tag">✂️ Services</span>
+                    <h2>Optician</h2>
+                    <p>Location: Men's Hostel Gate</p>
+                    <p>Description: Eyeglasses, lenses, and eye care</p>
+                    <p class="price">Avg. Price: ₹3000</p>
+                    <div class="rating" data-stars="2.5">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <div class="shop-meta">
+                        <span class="shop-contact">📞 98765-22222</span>
+                        <span class="status-badge" data-open="9" data-close="20">⏳</span>
+                    </div>
+                    <div class="details">Hours: 9:00 AM – 8:00 PM</div>
+                </article>
+
+                <article class="shop-item" data-price="500" data-category="stationery" data-rating="5" data-open="10" data-close="21">
+                    <i class="favorite far fa-heart"></i>
+                    <span class="category-tag">📝 Stationery</span>
+                    <h2>Shri Balaji Store</h2>
+                    <p>Location: Near TT</p>
+                    <p>Description: Groceries, stationery, and daily essentials</p>
+                    <p class="price">Avg. Price: ₹500</p>
+                    <div class="rating" data-stars="5">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="shop-meta">
+                        <span class="shop-contact">📞 98765-33333</span>
+                        <span class="status-badge" data-open="10" data-close="21">⏳</span>
+                    </div>
+                    <div class="details">Hours: 10:00 AM – 9:00 PM</div>
+                </article>
+
+                <article class="shop-item" data-price="200" data-category="stationery" data-rating="4" data-open="9" data-close="19">
+                    <i class="favorite far fa-heart"></i>
+                    <span class="category-tag">📝 Stationery</span>
+                    <h2>Campus Stationery Hub</h2>
+                    <p>Location: Near Academic Block 1</p>
+                    <p>Description: Notebooks, pens, art supplies, and printing</p>
+                    <p class="price">Avg. Price: ₹200</p>
+                    <div class="rating" data-stars="4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="shop-meta">
+                        <span class="shop-contact">📞 98765-44444</span>
+                        <span class="status-badge" data-open="9" data-close="19">⏳</span>
+                    </div>
+                    <div class="details">Hours: 9:00 AM – 7:00 PM</div>
+                </article>
+
+                <article class="shop-item" data-price="150" data-category="food" data-rating="4.5" data-open="8" data-close="22">
+                    <i class="favorite far fa-heart"></i>
+                    <span class="category-tag">🍕 Food</span>
+                    <h2>Fresh Juice Corner</h2>
+                    <p>Location: Near Food Court</p>
+                    <p>Description: Fresh juices, smoothies, milkshakes, and snacks</p>
+                    <p class="price">Avg. Price: ₹150</p>
+                    <div class="rating" data-stars="4.5">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="shop-meta">
+                        <span class="shop-contact">📞 98765-55555</span>
+                        <span class="status-badge" data-open="8" data-close="22">⏳</span>
+                    </div>
+                    <div class="details">Hours: 8:00 AM – 10:00 PM</div>
+                </article>
+            </section>
+
+            <footer>
+                &copy; 2025 VITConnect. All rights reserved.
+            </footer>
+        </div>
+    </main>
+
+    <script src="shops.js"></script>
+
+</body>
+</html>
