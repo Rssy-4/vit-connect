@@ -1,0 +1,36 @@
+.shops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.shop-card { background: #f8fafc; padding: 22px; border-radius: 14px; border: 1.5px solid #f1f5f9; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+.shop-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.shop-card h3 { color: #1e293b; margin-bottom: 6px; }
+.shop-card p { color: #64748b; font-size: 0.95rem; }
+
+.shop-controls { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+.shop-controls input, .shop-controls select { flex: 1; min-width: 200px; }
+
+.fav-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; transition: transform 0.2s; }
+.fav-btn:hover { transform: scale(1.2); }
+
+.category-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: center; }
+.cat-btn { padding: 8px 20px; border: 1.5px solid #e2e8f0; background: white; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #475569; transition: all 0.25s; }
+.cat-btn:hover { border-color: #3b82f6; color: #1a56db; }
+.cat-btn.active { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white; border-color: transparent; }
+
+.shop-item { background: #f8fafc; padding: 22px; border-radius: 14px; border: 1.5px solid #f1f5f9; text-align: left; transition: transform 0.3s, box-shadow 0.3s; margin-bottom: 20px; }
+.shop-item:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.shop-item h2 { color: #1e293b; margin-bottom: 6px; font-size: 1.3rem; }
+.shop-item p { color: #64748b; font-size: 0.95rem; }
+
+.status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; margin-top: 8px; }
+.status-open { background: #dcfce7; color: #16a34a; }
+.status-closed { background: #fee2e2; color: #dc2626; }
+
+.shop-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.shop-contact { font-size: 0.88rem; color: #3b82f6; font-weight: 500; }
+.category-tag { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 0.78rem; font-weight: 600; background: #eff6ff; color: #1a56db; margin-bottom: 8px; }
+
+.favorite { transition: transform 0.2s; }
+.favorite:hover { transform: scale(1.2); }
+.favorite.fas { color: #ef4444; }
+.favorite.far { color: #cbd5e1; }
+
+.rating { color: #f59e0b; margin: 8px 0; }

@@ -1,0 +1,21 @@
+#clubDescription { background: #eff6ff; padding: 14px; border-radius: 10px; margin-top: 10px; color: #475569; font-size: 0.95rem; border-left: 4px solid #3b82f6; }
+#btnTooltip { background: #1e293b; color: white; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; margin-top: 8px; text-align: center; }
+.radio-group label, .checkbox-group label { display: inline; font-weight: normal; margin-right: 15px; cursor: pointer; }
+
+.ui-card { background-color: #ffffff; padding: 25px; border-radius: 16px; border: 1.5px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); margin-bottom: 25px; }
+.ui-card h3 { color: #0f172a; margin-top: 0; margin-bottom: 20px; font-size: 1.25rem; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
+.ui-card label { font-weight: 600; color: #334155; margin-bottom: 6px; font-size: 0.95rem; }
+
+.status-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 5px; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+.status-table th { background: #f8fafc; color: #475569; padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 1px solid #e2e8f0; }
+.status-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+.status-table tr:last-child td { border-bottom: none; }
+.status-table tr:hover { background: #f8fafc; }
+
+.status-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; }
+.status-open { background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+.status-closed { background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+
+.btn-wrapper { text-align: center; margin-top: 10px; }
+#registerBtn { padding: 12px 30px; font-size: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(26, 86, 219, 0.2); transition: transform 0.2s, box-shadow 0.2s; }
+#registerBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26, 86, 219, 0.3); }

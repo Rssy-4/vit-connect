@@ -1,0 +1,16 @@
+.menu-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.menu-table th { background: linear-gradient(135deg, #1a56db, #3b82f6); color: white; padding: 14px 16px; text-align: left; font-size: 0.95rem; }
+.menu-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; color: #475569; font-size: 0.95rem; }
+.menu-table tr:hover { background: #eff6ff; }
+
+.menu-controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+
+.todays-special { background: linear-gradient(135deg, #eff6ff, #f0f7ff); border: 1.5px solid #bfdbfe; border-radius: 14px; padding: 24px; margin-bottom: 30px; }
+.todays-special h3 { color: #1a56db; font-size: 1.3rem; margin-bottom: 16px; }
+.today-meals { display: flex; gap: 20px; flex-wrap: wrap; }
+.today-type { flex: 1; min-width: 250px; background: white; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0; }
+.type-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
+.today-type p { margin: 6px 0; color: #475569; font-size: 0.93rem; }
+
+.meal-label { font-weight: 600; color: #1e293b; white-space: nowrap; }
+.meal-time { color: #3b82f6; font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
