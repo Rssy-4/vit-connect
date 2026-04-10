@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/vit-connect/static/css/main.28f450ab.css",
-    "main.js": "/vit-connect/static/js/main.2343bdab.js",
+    "main.js": "/vit-connect/static/js/main.fa77a4dc.js",
     "index.html": "/vit-connect/index.html",
     "main.28f450ab.css.map": "/vit-connect/static/css/main.28f450ab.css.map",
-    "main.2343bdab.js.map": "/vit-connect/static/js/main.2343bdab.js.map"
+    "main.fa77a4dc.js.map": "/vit-connect/static/js/main.fa77a4dc.js.map"
   },
   "entrypoints": [
     "static/css/main.28f450ab.css",
-    "static/js/main.2343bdab.js"
+    "static/js/main.fa77a4dc.js"
   ]
 }
