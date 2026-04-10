@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/vit-connect/static/css/main.28f450ab.css",
+    "main.js": "/vit-connect/static/js/main.2343bdab.js",
+    "index.html": "/vit-connect/index.html",
+    "main.28f450ab.css.map": "/vit-connect/static/css/main.28f450ab.css.map",
+    "main.2343bdab.js.map": "/vit-connect/static/js/main.2343bdab.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28f450ab.css",
+    "static/js/main.2343bdab.js"
+  ]
+}
